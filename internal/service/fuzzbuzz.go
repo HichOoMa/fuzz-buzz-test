@@ -1,5 +1,7 @@
 package service
 
+import "strconv"
+
 func FuzzBuzz(int1, int2, limit int, str1, str2 string) []string {
 	result := make([]string, limit)
 	for i := 1; i <= limit; i++ {
@@ -11,7 +13,7 @@ func FuzzBuzz(int1, int2, limit int, str1, str2 string) []string {
 		case i%int2 == 0:
 			result[i-1] = str2
 		default:
-			result[i-1] = string(rune(i))
+			result[i-1] = strconv.Itoa(i)
 		}
 	}
 
