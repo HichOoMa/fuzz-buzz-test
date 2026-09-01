@@ -15,7 +15,3 @@ test:
 # Run the test suite with verbose output.
 test-verbose:
 	go test -v ./...
-
-# Run the test suite with coverage report.
-test-cover:
-	go test -cover ./...
