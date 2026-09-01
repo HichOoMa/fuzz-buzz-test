@@ -7,9 +7,18 @@ import (
 
 	"fizz-buzz.com/internal/handler"
 	"fizz-buzz.com/internal/middleware"
+	"github.com/go-playground/validator/v10"
 	"github.com/joho/godotenv"
 	"github.com/labstack/echo/v5"
 )
+
+type CustomValidator struct {
+	validator *validator.Validate
+}
+
+func (cv *CustomValidator) Validate(i interface{}) error {
+	return cv.validator.Struct(i)
+}
 
 func main() {
 	if err := godotenv.Load(); err != nil {
@@ -18,6 +27,9 @@ func main() {
 
 	e := echo.New()
 
+	e.Validator = &CustomValidator{
+		validator: validator.New(),
+	}
 	e.Use(middleware.StatsMiddleware)
 
 	e.GET("/fuzzbuzz", handler.FuzzBuzzHandler)

@@ -12,6 +12,10 @@ func FuzzBuzzHandler(ctx *echo.Context) error {
 		return ctx.JSON(400, map[string]string{"error": "Invalid request"})
 	}
 
+	if err := ctx.Validate(req); err != nil {
+		return ctx.JSON(400, map[string]string{"error": validationErrorMessage(err)})
+	}
+
 	result := service.FuzzBuzz(req.Int1, req.Int2, req.Limit, req.Str1, req.Str2)
 	return ctx.JSON(200, result)
 }

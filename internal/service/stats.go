@@ -27,7 +27,7 @@ func RecordRequest(values url.Values) {
 	statsParams[key] = params
 }
 
-func MostUsedRequest() model.RequestStats {
+func MostUsedRequest() model.StatsRequest {
 	statsMu.Lock()
 	defer statsMu.Unlock()
 
@@ -40,7 +40,7 @@ func MostUsedRequest() model.RequestStats {
 		}
 	}
 
-	return model.RequestStats{
+	return model.StatsRequest{
 		Params: statsParams[topKey],
 		Count:  topCount,
 	}

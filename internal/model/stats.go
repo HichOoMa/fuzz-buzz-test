@@ -1,6 +1,6 @@
 package model
 
-type RequestStats struct {
+type StatsRequest struct {
 	Params map[string]string
 	Count  int
 }

@@ -68,7 +68,7 @@ func TestMostUsedRequest(t *testing.T) {
 		resetStats()
 
 		got := MostUsedRequest()
-		want := model.RequestStats{Params: nil, Count: 0}
+		want := model.StatsRequest{Params: nil, Count: 0}
 		if !reflect.DeepEqual(got, want) {
 			t.Errorf("MostUsedRequest() = %+v, want %+v", got, want)
 		}
@@ -86,7 +86,7 @@ func TestMostUsedRequest(t *testing.T) {
 		RecordRequest(most)
 
 		got := MostUsedRequest()
-		want := model.RequestStats{
+		want := model.StatsRequest{
 			Params: map[string]string{"int1": "7", "int2": "11"},
 			Count:  3,
 		}
